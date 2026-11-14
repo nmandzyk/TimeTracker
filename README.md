@@ -18,6 +18,17 @@ Release builds are in `publish\<runtime>\` and zipped in `publish\dist\`:
 | macOS Apple Silicon | `publish\osx-arm64` | `TimeTracker` |
 | macOS Intel | `publish\osx-x64` | `TimeTracker` |
 
+## Installing with a package manager
+
+| Platform | Command |
+|---|---|
+| Windows (Scoop) | `scoop bucket add nmandzyk https://github.com/nmandzyk/scoop-bucket` then `scoop install timetracker` |
+| macOS / Linux (Homebrew) | `brew install nmandzyk/tap/timetracker` |
+| Debian / Ubuntu | download `timetracker_<version>_amd64.deb` from the [releases](https://github.com/nmandzyk/TimeTracker/releases) page, then `sudo dpkg -i <file>.deb` |
+| Fedora / RHEL | download the `.rpm` from the releases page, then `sudo rpm -i <file>.rpm` |
+
+Homebrew on Linux only has an x64 build. The `.deb`/`.rpm` packages install the binary as `/usr/bin/TimeTracker`.
+
 ## Starting the app
 
 ### Windows
@@ -124,10 +135,12 @@ Releases follow gitflow (`develop` → `release/<version>` → `master`). Commit
 The script:
 1. Creates `release/<version>` from `develop` and runs `dotnet test`.
 2. Publishes `win-x64`, `linux-x64`, `osx-arm64`, `osx-x64` and zips them into `publish\dist\TimeTracker-<version>-<rid>.zip`.
-3. Merges the release branch into `master` (tagged `v<version>`) and back into `develop`, then pushes them.
-4. Creates a GitHub release with the zips attached (requires the `gh` CLI).
+3. Builds a `.deb` and `.rpm` from the `linux-x64` build with [nfpm](https://nfpm.goreleaser.com) (skipped with a warning if `nfpm` is not installed: `scoop install nfpm` or `winget install goreleaser.nfpm`).
+4. Merges the release branch into `master` (tagged `v<version>`) and back into `develop`, then pushes them.
+5. Creates a GitHub release with the zips, `.deb` and `.rpm` attached (requires the `gh` CLI).
+6. Updates the package managers from the templates in `packaging\`, creating the repos on first use: the Scoop bucket `nmandzyk/scoop-bucket` (`bucket/timetracker.json`) and the Homebrew tap `nmandzyk/homebrew-tap` (`Formula/timetracker.rb`). Download URLs and SHA-256 hashes are filled in automatically.
 
-Options: `-SkipTests`, `-NoGitHubRelease`, `-Runtimes <rid>,<rid>`.
+Options: `-SkipTests`, `-NoGitHubRelease`, `-SkipPackageManagers`, `-Runtimes <rid>,<rid>`, `-GitHubRepo`, `-ScoopBucketRepo`, `-HomebrewTapRepo`. The Homebrew tap needs all of `osx-arm64`, `osx-x64` and `linux-x64`.
 
 ## Project layout
 

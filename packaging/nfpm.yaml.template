@@ -1,0 +1,14 @@
+name: timetracker
+arch: amd64
+platform: linux
+version: "{{VERSION}}"
+section: utils
+maintainer: nmandzyk
+description: Small, portable, always-on-top time tracker with a local HTTP API
+homepage: https://github.com/nmandzyk/TimeTracker
+license: MIT
+contents:
+  - src: "{{BINARY}}"
+    dst: /usr/bin/TimeTracker
+    file_info:
+      mode: 0755

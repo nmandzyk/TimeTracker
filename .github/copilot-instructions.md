@@ -31,6 +31,12 @@ Three layers; dependencies only point downward:
 - Data directory resolution: `--data <folder>` / `TIMETRACKER_DATA` → executable folder → `%APPDATA%\TimeTracker` (first writable wins).
 - Nullable reference types and implicit usings are enabled in every project; Avalonia compiled bindings are on by default.
 
+## Releases & packaging
+
+- `scripts\release.ps1 -Version x.y.z` performs the whole gitflow release (`develop` → `release/x.y.z` → `master` + tag `vx.y.z`), builds zips/`.deb`/`.rpm`, creates the GitHub release and pushes updated manifests to the Scoop bucket (`nmandzyk/scoop-bucket`) and Homebrew tap (`nmandzyk/homebrew-tap`).
+- Package manifests are generated from `packaging\` templates (`{{PLACEHOLDER}}` tokens); edit the templates, not the generated files in the external repos.
+- The main branch is `master`, not `main`.
+
 ## Contributing
 
 - Follow the gitflow branching policy.
