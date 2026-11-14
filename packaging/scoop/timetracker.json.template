@@ -1,0 +1,27 @@
+{
+    "version": "{{VERSION}}",
+    "description": "Small, portable, always-on-top time tracker with a local HTTP API",
+    "homepage": "https://github.com/nmandzyk/TimeTracker",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "{{WIN_X64_URL}}",
+            "hash": "{{WIN_X64_SHA256}}"
+        }
+    },
+    "bin": "TimeTracker.exe",
+    "shortcuts": [
+        [
+            "TimeTracker.exe",
+            "Time Tracker"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/nmandzyk/TimeTracker/releases/download/v$version/TimeTracker-$version-win-x64.zip"
+            }
+        }
+    }
+}
