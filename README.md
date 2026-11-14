@@ -7,27 +7,57 @@ A small, portable, always-on-top time tracker. Enter what you are working on, pr
 - Tray-only: no taskbar/Dock button, borderless thin-border window, draggable, always on top
 - All data is stored in **UTC**; the UI shows **local time**
 
-## Download / build output
+## Installation
 
-Release builds are in `publish\<runtime>\` and zipped in `publish\dist\`:
+Pick the option for your platform. All builds are self-contained: no .NET runtime is needed. Files are on the [releases page](https://github.com/nmandzyk/TimeTracker/releases/latest) (`TimeTracker-<version>-<rid>.zip`).
 
-| Platform | Folder | File |
-|---|---|---|
-| Windows x64 | `publish\win-x64` | `TimeTracker.exe` |
-| Linux x64 | `publish\linux-x64` | `TimeTracker` |
-| macOS Apple Silicon | `publish\osx-arm64` | `TimeTracker` |
-| macOS Intel | `publish\osx-x64` | `TimeTracker` |
+### Windows (x64)
 
-## Installing with a package manager
+**Scoop**
+```powershell
+scoop bucket add nmandzyk https://github.com/nmandzyk/scoop-bucket
+scoop install timetracker
+```
+Adds `TimeTracker` to your PATH and a Start menu shortcut. Update with `scoop update timetracker`.
 
-| Platform | Command |
-|---|---|
-| Windows (Scoop) | `scoop bucket add nmandzyk https://github.com/nmandzyk/scoop-bucket` then `scoop install timetracker` |
-| macOS / Linux (Homebrew) | `brew install nmandzyk/tap/timetracker` |
-| Debian / Ubuntu | download `timetracker_<version>_amd64.deb` from the [releases](https://github.com/nmandzyk/TimeTracker/releases) page, then `sudo dpkg -i <file>.deb` |
-| Fedora / RHEL | download the `.rpm` from the releases page, then `sudo rpm -i <file>.rpm` |
+**Manual:** download `TimeTracker-<version>-win-x64.zip`, extract it anywhere and run `TimeTracker.exe`.
 
-Homebrew on Linux only has an x64 build. The `.deb`/`.rpm` packages install the binary as `/usr/bin/TimeTracker`.
+### macOS (Apple Silicon and Intel)
+
+**Homebrew**
+```bash
+brew install nmandzyk/tap/timetracker
+TimeTracker
+```
+Update with `brew upgrade timetracker`.
+
+**Manual:** download `TimeTracker-<version>-osx-arm64.zip` (Apple Silicon) or `osx-x64.zip` (Intel), then:
+```bash
+unzip TimeTracker-<version>-osx-arm64.zip
+chmod +x TimeTracker
+xattr -d com.apple.quarantine TimeTracker
+```
+
+### Linux (x64)
+
+**Debian / Ubuntu**
+```bash
+sudo dpkg -i timetracker_<version>_amd64.deb
+```
+
+**Fedora / RHEL**
+```bash
+sudo rpm -i timetracker-<version>-1.x86_64.rpm
+```
+
+**Homebrew**
+```bash
+brew install nmandzyk/tap/timetracker
+```
+
+**Manual:** download `TimeTracker-<version>-linux-x64.zip`, then `unzip` it and run `chmod +x TimeTracker`.
+
+The `.deb`/`.rpm` packages and Homebrew put `TimeTracker` on your PATH (`/usr/bin/TimeTracker` for the packages). The `.deb`/`.rpm` files are on the releases page. See [Starting the app](#starting-the-app) for first-run notes per platform (SmartScreen, tray support, Gatekeeper).
 
 ## Starting the app
 
