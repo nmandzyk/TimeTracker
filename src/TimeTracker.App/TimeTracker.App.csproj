@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>TimeTracker</AssemblyName>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.23" />
+    <ProjectReference Include="..\TimeTracker.Core\TimeTracker.Core.csproj" />
+    <ProjectReference Include="..\TimeTracker.Api\TimeTracker.Api.csproj" />
+  </ItemGroup>
+
+</Project>
