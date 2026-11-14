@@ -113,6 +113,22 @@ dotnet publish src/TimeTracker.App -c Release -r <rid> --self-contained \
 ```
 `<rid>` = `win-x64`, `linux-x64`, `osx-arm64`, `osx-x64`. Close the running app (tray → Quit) before republishing to Windows, otherwise the exe is locked.
 
+## Creating a release
+
+Releases follow gitflow (`develop` → `release/<version>` → `master`). Commit all changes, quit the running app, then run:
+
+```powershell
+.\scripts\release.ps1 -Version 1.2.0
+```
+
+The script:
+1. Creates `release/<version>` from `develop` and runs `dotnet test`.
+2. Publishes `win-x64`, `linux-x64`, `osx-arm64`, `osx-x64` and zips them into `publish\dist\TimeTracker-<version>-<rid>.zip`.
+3. Merges the release branch into `master` (tagged `v<version>`) and back into `develop`, then pushes them.
+4. Creates a GitHub release with the zips attached (requires the `gh` CLI).
+
+Options: `-SkipTests`, `-NoGitHubRelease`, `-Runtimes <rid>,<rid>`.
+
 ## Project layout
 
 ```
